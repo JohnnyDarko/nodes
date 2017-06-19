@@ -24,19 +24,19 @@ gps-host-sil: DEFINES = -DSIL -DUNIT_TEST
 gps-host-sil: CFLAGS = $(DEFINES) -v -ggdb -O0 -Wall -Werror -std=c++11 $(INCDIRS)
 gps-host-sil: XFLAGS = $(DEFINES) -v -ggdb -O0 -Wall -Werror -std=c++11 $(INCDIRS) 
 gps-host-sil: gps gps_test  
-	$(CXX)  -o  $(BIN_DIR)/test $(DRIVER_OBJECTS) $(NODE_OBJECTS)  $(TEST_OBJECTS)  $(LIBS) -static
+	$(CXX)  -o  $(BIN_DIR)/gps-host-sil_test $(DRIVER_OBJECTS) $(NODE_OBJECTS)  $(TEST_OBJECTS)  $(LIBS) -static
 
 gps-target-sil: CC = arm-linux-gnueabihf-gcc
 gps-target-sil: CXX = arm-linux-gnueabihf-g++
 gps-target-sil: DEFINES = -DSIL -DUNIT_TEST
 gps-target-sil: CFLAGS = $(DEFINES) -v -ggdb -O0 -Wall -Werror -std=c++11 $(INCDIRS)
 gps-target-sil: XFLAGS = $(DEFINES) -v -ggdb -O0 -Wall -Werror -std=c++11 $(INCDIRS) 
-gps-target-sil: gps_test  
-	$(CXX)  -o  $(BIN_DIR)/test $(DRIVER_OBJECTS) $(TARGET_OBJECTS)  $(TEST_OBJECTS)  $(LIBS) -static
+gps-target-sil: gps gps_test  
+	$(CXX)  -o  $(BIN_DIR)/gps-target-sil_test $(DRIVER_OBJECTS) $(NODE_OBJECTS)  $(TEST_OBJECTS)  $(LIBS) -static
 
 # *********** TESTS *****************************
 
-gps_test: gps 
+gps_test: gps
 	$(CXX) -c $(XFLAGS) ./Gps_test.cpp  -o $(BUILD_DIR)/Gps_test.o
 
 # *********** TARGETS ***************************
